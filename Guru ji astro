@@ -1,0 +1,61 @@
+import React, { Component }
+from 'react';
+import ReactDOM from 'react-dom';
+import { Router, Route, IndexRoute, browserHistory } from
+'react-router';
+import HomePage from './components/pages/HomePage.react';
+import LoginPage from './components/pages/LoginPage.react';
+class App extends Component {
+ render() {
+ <div>
+ </div>
+ }
+}
+export default App;
+import React, {Component}
+from 'react';
+import { Link } from 'react-router';
+class HomePage extends Component {
+ render() {
+ const dispatch = this.props.dispath;
+ const { loggedIn } = this.props.data;
+ return (
+ <article>
+ <div>
+ <section>
+ <h1>Bienvenido a Invbox </h1>
+ <div>
+ <Link to="/">Home</Link>
+ </div>
+ <div>
+ <Link to="/login">Ingresar</Link>
+ <Link to="/register">Registrate</Link>
+ </div>
+ </section>
+ </div>
+ </article>
+ );
+ }
+}
+export default HomePage;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import './index.css';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import HomePage from './components/pages/HomePage.react';
+import LoginPage from './components/pages/LoginPage.react';
+function checkAuth(nextState, replaceState) {
+ let { loggedIn } = true;
+}
+ReactDOM.render(
+ <Router history={browserHistory}>
+ <Route path="/" component={App}>
+ <Route path="/home" component={HomePage} />
+ <Route onEnter={checkAuth}>
+ <Route path="/login" component={LoginPage} />
+ </Route>
+ </Route>
+ </Router>,
+ document.getElementById('root')
+);
